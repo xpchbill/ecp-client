@@ -1,5 +1,4 @@
 import Vue from 'vue';
-// import 'croppie/croppie.css';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';

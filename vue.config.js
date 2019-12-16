@@ -1,5 +1,3 @@
-/* Copyright 2019 Edouard Maleix, read LICENSE */
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -19,11 +17,11 @@ module.exports = {
           node_vendors: {
             test: /[\\/]node_modules[\\/]/,
             // chunks: "async",
-            priority: 1,
-          },
-        },
-      },
-    },
+            priority: 1
+          }
+        }
+      }
+    }
   },
 
   chainWebpack: config => {
@@ -34,8 +32,8 @@ module.exports = {
         // Options similar to the same options in webpackOptions.output
         // both options are optional
         filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-      }),
+        chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+      })
     );
 
     if (process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
@@ -47,7 +45,7 @@ module.exports = {
           test: new RegExp('\\.(js|css)$'),
           threshold: 1024,
           minRatio: 0.8,
-          compressionOptions: { level: 6 },
+          compressionOptions: { level: 6 }
         })
       );
     }
@@ -69,5 +67,5 @@ module.exports = {
     //     options.fallback = false;
     //     return options;
     //   });
-  },
+  }
 };
