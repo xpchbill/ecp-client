@@ -6,10 +6,10 @@
 export default {
   created() {
     // Boot Application
-  },
+  }
 };
 </script>
 
-<style lang="scss">
-@import 'styles/app.scss';
+<style lang="less">
+@import 'styles/app.less';
 </style>

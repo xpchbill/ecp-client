@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VuexPersistence from 'vuex-persist';
+// import VuexPersistence from 'vuex-persist';
 import vuexCache from 'vuex-cache';
 import {
   SIDEBAR_TYPE,
@@ -18,24 +18,24 @@ import getters from './getters';
 
 Vue.use(Vuex);
 
-const profileStorage = new VuexPersistence({
-  key: 'profile',
-  storage: window.localStorage,
-  reducer: state => ({
-    account: state.auth.account,
-    address: state.address.profileAddress
-  })
-});
+// const profileStorage = new VuexPersistence({
+//   key: 'profile',
+//   storage: window.localStorage,
+//   reducer: state => ({
+//     account: state.auth.account,
+//     address: state.address.profileAddress
+//   })
+// });
 
-const deviceStorage = new VuexPersistence({
-  key: 'devices',
-  storage: window.localStorage,
-  reducer: state => ({
-    collection: state.device.collection
-  }),
-  filter: mutation => mutation.type === 'setStateKV',
-  asyncStorage: false
-});
+// const deviceStorage = new VuexPersistence({
+//   key: 'devices',
+//   storage: window.localStorage,
+//   reducer: state => ({
+//     collection: state.device.collection
+//   }),
+//   filter: mutation => mutation.type === 'setStateKV',
+//   asyncStorage: false
+// });
 
 export default new Vuex.Store({
   state: {
@@ -43,7 +43,10 @@ export default new Vuex.Store({
     serverUrl: `${process.env.VUE_APP_SERVER_URL}`,
     restApiRoot: `${process.env.VUE_APP_ROOT_API}`,
     clientUrl: `${process.env.VUE_APP_CLIENT_URL}`,
-    device: 'desktop'
+    device: 'desktop',
+    sidebar: true,
+    theme: 'dark',
+    layout: 'sidemenu'
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {
@@ -136,7 +139,8 @@ export default new Vuex.Store({
       commit('TOGGLE_MULTI_TAB', bool);
     }
   },
-  plugins: [profileStorage.plugin, deviceStorage.plugin, vuexCache({ timeout: 3000 })],
+  // plugins: [profileStorage.plugin, deviceStorage.plugin, vuexCache({ timeout: 3000 })],
+  plugins: [vuexCache({ timeout: 3000 })],
   modules: {},
   getters
 });

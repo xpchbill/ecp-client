@@ -18,14 +18,10 @@
 export default {
   name: 'NotFound',
 
-  components: {
-  },
+  components: {},
 
   data() {
     return {};
-  },
+  }
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -5,12 +5,12 @@ import scm from './scm';
 
 Vue.use(Router);
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-    children: [...scm]
+    children: [scm]
   },
   {
     path: '*',

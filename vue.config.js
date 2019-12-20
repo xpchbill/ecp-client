@@ -7,6 +7,14 @@ process.env.VUE_APP_VERSION = require('./package.json').version;
 module.exports = {
   parallel: false,
 
+  css: {
+    loaderOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
+
   configureWebpack: {
     optimization: {
       // runtimeChunk: 'single',
@@ -50,6 +58,16 @@ module.exports = {
       );
     }
 
+    // config.module
+    //   .rule('css')
+    //   .test(/\.less$/i)
+    //   .use('less-loader')
+    //   .tap(options => {
+    //     return {
+    //       ...options,
+    //       javascriptEnabled: true
+    //     };
+    //   });
     // config.module
     //   .rule('worker')
     //   .test(/\.worker\.js$/i)

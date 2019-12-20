@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueStorage from 'vue-ls';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
@@ -84,6 +85,12 @@ Vue.use(Progress);
 Vue.use(Skeleton);
 Vue.use(Popconfirm);
 Vue.use(notification);
+
+Vue.use(VueStorage, {
+  namespace: 'pro__',
+  name: 'ls',
+  storage: 'local'
+});
 
 new Vue({
   router,
