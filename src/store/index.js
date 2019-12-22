@@ -44,9 +44,12 @@ export default new Vuex.Store({
     restApiRoot: `${process.env.VUE_APP_ROOT_API}`,
     clientUrl: `${process.env.VUE_APP_CLIENT_URL}`,
     device: 'desktop',
-    sidebar: true,
-    theme: 'dark',
-    layout: 'sidemenu'
+    sidebar: false,
+    theme: 'light',
+    multiTab: true,
+    layout: 'sidemenu',
+    collapsedWidth: 60,
+    topHeaderColor: '#2D4F97'
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {

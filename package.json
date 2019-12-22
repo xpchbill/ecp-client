@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service lint --fix",
     "start:dev": "cp deploy/.env_dev .env && vue-cli-service serve"
   },
   "dependencies": {

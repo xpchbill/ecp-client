@@ -1,14 +1,18 @@
 <template>
-  <a-layout :class="['layout', device]">
+  <a-layout-sider
+    v-model="collapsed"
+    class="ecp-layout__main-menu"
+    :theme="navTheme"
+    :collapsedWidth="collapsedWidth"
+  >
     <side-menu
-      v-if="isSideMenu()"
       mode="inline"
       :menus="menus"
       :theme="navTheme"
       :collapsed="collapsed"
       :collapsible="true"
     ></side-menu>
-  </a-layout>
+  </a-layout-sider>
 </template>
 
 <script>
@@ -27,12 +31,28 @@ export default {
   data() {
     return {
       collapsed: false,
-      menus: [
-        ...routes[0].children
-      ]
+      menus: [...routes[0].children]
     };
   },
-  mounted() {},
+  watch: {
+    sidebarOpened(val) {
+      this.collapsed = !val;
+    }
+  },
+  created() {
+    this.collapsed = !this.sidebarOpened;
+  },
+  mounted() {
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf('Edge') > -1) {
+      this.$nextTick(() => {
+        this.collapsed = !this.collapsed;
+        setTimeout(() => {
+          this.collapsed = !this.collapsed;
+        }, 16);
+      });
+    }
+  },
   methods: {
     drawerClose() {
       this.collapsed = false;

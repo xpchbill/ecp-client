@@ -32,11 +32,11 @@ export default {
     // }
   },
   watch: {
-    sidebarOpened (val) {
+    sidebarOpened(val) {
       this.collapsed = !val;
     }
   },
-  created () {
+  created() {
     this.collapsed = !this.sidebarOpened;
   },
   mounted() {
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     ...mapActions(['setSidebar']),
-    toggle () {
+    toggle() {
       this.collapsed = !this.collapsed;
       this.setSidebar(!this.collapsed);
       // triggerWindowResizeEvent();

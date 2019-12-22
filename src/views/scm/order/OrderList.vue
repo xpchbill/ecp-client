@@ -1,19 +1,19 @@
 <template>
   <a-card class="card" title="生产订单列表" :bordered="false">
     <a-table :columns="columns" :dataSource="data">
-      <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
+      <a slot="name" slot-scope="text" href="javascript:;">{{ text }}</a>
       <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
       <span slot="tags" slot-scope="tags">
         <a-tag
           v-for="tag in tags"
-          :color="tag==='loser' ? 'volcano' : (tag.length > 5 ? 'geekblue' : 'green')"
+          :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
           :key="tag"
         >
-          {{tag.toUpperCase()}}
+          {{ tag.toUpperCase() }}
         </a-tag>
       </span>
       <span slot="action" slot-scope="text, record">
-        <a href="javascript:;">Invite 一 {{record.name}}</a>
+        <a href="javascript:;">Invite 一 {{ record.name }}</a>
         <a-divider type="vertical" />
         <a href="javascript:;">Delete</a>
         <a-divider type="vertical" />

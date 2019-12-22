@@ -6,6 +6,7 @@ const global = {
       layoutMode: state => state.layout,
       navTheme: state => state.theme,
       primaryColor: state => state.color,
+      topHeaderColor: state => state.topHeaderColor,
       colorWeak: state => state.weak,
       fixedHeader: state => state.fixedHeader,
       fixSiderbar: state => state.fixSiderbar,
@@ -13,6 +14,7 @@ const global = {
       contentWidth: state => state.contentWidth,
       autoHideHeader: state => state.autoHideHeader,
       sidebarOpened: state => state.sidebar,
+      collapsedWidth: state => state.collapsedWidth,
       multiTab: state => state.multiTab
     })
   },

@@ -1,0 +1,28 @@
+// modify ant-tab
+@tab-prefix-cls: ~'@{ant-prefix}-tabs';
+
+.@{tab-prefix-cls} {
+  &-bar {
+    border-bottom: 0;
+  }
+  &&-card &-card-bar &-tab &-close-x {
+    width: 10px;
+    height: 10px;
+    margin-left: 7px;
+    margin-right: -10px;
+  }
+
+  &&-card &-card-bar &-tab &-close-x svg {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+// modify ant-menu
+@menu-prefix-cls: ~'@{ant-prefix}-menu';
+
+.@{menu-prefix-cls} {
+  &-vertical {
+    border-right: 0;
+  }
+}

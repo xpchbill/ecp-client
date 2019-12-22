@@ -4,30 +4,44 @@
       <top-header />
     </a-layout-header>
     <a-layout class="ecp-layout__main">
-      <a-layout-sider class="ecp-layout__main-menu" width="200">
-        <left-menu />
-      </a-layout-sider>
+      <left-menu />
       <a-layout-content class="ecp-layout__main-body">
-        <router-view></router-view>
+        <multi-tab
+          v-if="multiTab"
+          class="ecp-multi-tabs"
+          :style="{ width: multiTabWidth }"
+        ></multi-tab>
+        <transition name="page-transition">
+          <router-view></router-view>
+        </transition>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script>
+import global from '@/mixins/global';
 import device from '@/mixins/device';
 import TopHeader from '@/containers/TopHeader';
 import LeftMenu from '@/containers/LeftMenu';
+import MultiTab from '@/components/MultiTab';
 
 export default {
   name: 'Home',
-  mixins: [device],
+  mixins: [global, device],
   components: {
+    MultiTab,
     'top-header': TopHeader,
     'left-menu': LeftMenu
   },
   data() {
     return {};
+  },
+  computed: {
+    multiTabWidth() {
+      return '100%';
+      // return `calc(100% - ${this.sidebarOpened ? 214 : 94}px)`;
+    }
   },
   mounted() {},
   methods: {}
@@ -44,7 +58,15 @@ export default {
   }
 
   &__main-body {
-    padding: 10px;
+    padding: 40px 0 0;
+  }
+
+  .ecp-multi-tabs {
+    position: fixed;
+    top: 64px;
+    margin: 0;
+    z-index: 1;
+    background: #dadada;
   }
 }
 </style>

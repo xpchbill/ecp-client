@@ -1,20 +1,28 @@
 <template>
   <a-layout-sider
-    :class="['sider', isDesktop() ? null : 'shadow', theme, fixSiderbar ? 'ant-fixed-sidemenu' : null ]"
+    :class="[
+      'sider',
+      isDesktop() ? null : 'shadow',
+      theme,
+      fixSiderbar ? 'ant-fixed-sidemenu' : null
+    ]"
     :collapsible="collapsible"
     v-model="collapsed"
-    :trigger="null">
+    :trigger="null"
+    :collapsedWidth="collapsedWidth"
+  >
     <s-menu
       :collapsed="collapsed"
       :menu="menus"
       :theme="theme"
       :mode="mode"
-      @select="onSelect"></s-menu>
+      @select="onSelect"
+    ></s-menu>
   </a-layout-sider>
 </template>
 
 <script>
-import SMenu from './index'
+import SMenu from './index';
 import global from '@/mixins/global';
 import device from '@/mixins/device';
 
@@ -31,7 +39,7 @@ export default {
     theme: {
       type: String,
       required: false,
-      default: 'dark'
+      default: 'light'
     },
     collapsible: {
       type: Boolean,
@@ -49,9 +57,9 @@ export default {
     }
   },
   methods: {
-    onSelect (obj) {
-      this.$emit('menuSelect', obj)
+    onSelect(obj) {
+      this.$emit('menuSelect', obj);
     }
   }
-}
+};
 </script>
