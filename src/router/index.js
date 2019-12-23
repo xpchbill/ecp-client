@@ -9,6 +9,7 @@ export const routes = [
   {
     path: '/',
     name: 'home',
+    redirect: { name: '/scm/order/list' },
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
     children: [scm]
   },

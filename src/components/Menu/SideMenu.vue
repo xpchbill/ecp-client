@@ -1,24 +1,11 @@
 <template>
-  <a-layout-sider
-    :class="[
-      'sider',
-      isDesktop() ? null : 'shadow',
-      theme,
-      fixSiderbar ? 'ant-fixed-sidemenu' : null
-    ]"
-    :collapsible="collapsible"
-    v-model="collapsed"
-    :trigger="null"
-    :collapsedWidth="collapsedWidth"
-  >
-    <s-menu
-      :collapsed="collapsed"
-      :menu="menus"
-      :theme="theme"
-      :mode="mode"
-      @select="onSelect"
-    ></s-menu>
-  </a-layout-sider>
+  <s-menu
+    :collapsed="collapsed"
+    :menu="menus"
+    :theme="theme"
+    :mode="mode"
+    @select="onSelect"
+  ></s-menu>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template lang="html">
   <div :class="['ecp-top-header', device]">
-    <div class="ecp-top-header__title">System Logo</div>
-    <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle" />
+    <div class="ecp-top-header__title">System Name</div>
+    <user-menu></user-menu>
   </div>
 </template>
 
@@ -10,26 +10,19 @@ import { mapActions } from 'vuex';
 import global from '@/mixins/global';
 import device from '@/mixins/device';
 
+import UserMenu from './UserMenu';
+
 export default {
   name: 'TopHeader',
   mixins: [global, device],
   props: {},
-  components: {},
+  components: {
+    UserMenu
+  },
   data() {
     return {
       collapsed: false
     };
-  },
-  computed: {
-    // contentPaddingLeft () {
-    //   if (!this.fixSidebar || this.isMobile()) {
-    //     return '0'
-    //   }
-    //   if (this.sidebarOpened) {
-    //     return '256px'
-    //   }
-    //   return '80px'
-    // }
   },
   watch: {
     sidebarOpened(val) {
@@ -55,21 +48,11 @@ export default {
     toggle() {
       this.collapsed = !this.collapsed;
       this.setSidebar(!this.collapsed);
-      // triggerWindowResizeEvent();
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.ecp-top-header {
-  display: flex;
-  align-items: center;
-  background: #fff;
-
-  &__title {
-    flex: 0 0 200px;
-    padding: 0 20px;
-  }
-}
+@import './index.less';
 </style>

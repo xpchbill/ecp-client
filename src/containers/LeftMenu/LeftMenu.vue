@@ -1,9 +1,10 @@
 <template>
   <a-layout-sider
-    v-model="collapsed"
+    collapsible
     class="ecp-layout__main-menu"
     :theme="navTheme"
     :collapsedWidth="collapsedWidth"
+    @collapse="toggle"
   >
     <side-menu
       mode="inline"
@@ -16,11 +17,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import global from '@/mixins/global';
 import device from '@/mixins/device';
 
 import SideMenu from '@/components/Menu/SideMenu';
 import { routes } from '@/router';
+import triggerWindowResizeEvent from '@/utils/triggerWindowResizeEvent';
 
 export default {
   name: 'LeftMenu',
@@ -54,9 +57,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setSidebar']),
     drawerClose() {
       this.collapsed = false;
+    },
+    toggle() {
+      this.collapsed = !this.collapsed;
+      this.setSidebar(!this.collapsed);
+      triggerWindowResizeEvent();
     }
   }
 };
 </script>
+
+<style lang="less" scoped>
+.ecp-layout__main-menu {
+  z-index: 10;
+  box-shadow: 4px 0 4px 0 rgba(217, 217, 217, 0.5);
+}
+</style>

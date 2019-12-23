@@ -35,7 +35,7 @@ export default {
           throw Error(e);
         }
       });
-    if(this.$route.path !== '/') {
+    if (this.$route.path !== '/') {
       this.pages.push(this.$route);
     }
     this.fullPathList.push(this.$route.fullPath);

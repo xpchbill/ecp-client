@@ -54,19 +54,13 @@ export default {
   flex-direction: column;
 
   &__header {
+    height: 54px;
+    line-height: 54px;
     padding: 0;
   }
 
   &__main-body {
     padding: 40px 0 0;
-  }
-
-  .ecp-multi-tabs {
-    position: fixed;
-    top: 64px;
-    margin: 0;
-    z-index: 1;
-    background: #dadada;
   }
 }
 </style>
