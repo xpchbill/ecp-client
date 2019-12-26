@@ -1,0 +1,27 @@
+
+@form-prefix-cls: ~'@{ant-prefix}-form';
+
+.@{form-prefix-cls}-inline {
+  .@{form-prefix-cls}-item {
+    display: flex;
+    margin-bottom: @form-item-margin-bottom;
+    margin-right: 0;
+
+    > .@{form-prefix-cls}-item-control-wrapper {
+      flex: 1 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    > .@{form-prefix-cls}-item-label {
+      line-height: 32px;
+      padding-right: 8px;
+      width: auto;
+    }
+
+    &-control {
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+}

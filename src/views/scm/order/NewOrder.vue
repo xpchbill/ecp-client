@@ -2,7 +2,21 @@
   <div>
     <a-card class="card" title="Tabs" :bordered="false">
       <a-tabs defaultActiveKey="1">
-        <a-tab-pane tab="Tab 1" key="1">Content of Tab Pane 1</a-tab-pane>
+        <a-tab-pane tab="Tab 1" key="1">
+          <a-list itemLayout="horizontal" :dataSource="data">
+            <a-list-item slot="renderItem" slot-scope="item">
+              <a-list-item-meta
+                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              >
+                <a slot="title" href="https://www.antdv.com/">{{ item.title }}</a>
+                <a-avatar
+                  slot="avatar"
+                  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                />
+              </a-list-item-meta>
+            </a-list-item>
+          </a-list>
+        </a-tab-pane>
         <a-tab-pane tab="Tab 2" key="2" forceRender>Content of Tab Pane 2</a-tab-pane>
         <a-tab-pane tab="Tab 3" key="3">Content of Tab Pane 3</a-tab-pane>
       </a-tabs>
@@ -107,6 +121,14 @@
 import global from '@/mixins/global';
 import device from '@/mixins/device';
 import FooterToolBar from '@/components/FooterToolbar';
+const data = [
+  {
+    title: 'Ant Design Title 1'
+  },
+  {
+    title: 'Ant Design Title 2'
+  }
+];
 
 export default {
   name: 'NewOrder',
@@ -123,6 +145,7 @@ export default {
   data() {
     return {
       // collapsed: false,
+      data,
       form: this.$form.createForm(this)
     };
   },

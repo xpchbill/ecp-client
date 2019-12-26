@@ -49,7 +49,7 @@ const colorList = [
   },
   {
     key: '极光绿',
-    color: '#39820f'
+    color: '#589433'
   },
   {
     key: '拂晓蓝',

@@ -70,10 +70,7 @@
 
     <div class="table-operator">
       <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
-      <a-button type="dashed" @click="tableOption"
-        >{{ (optionAlertShow && '关闭') || '开启' }} alert</a-button
-      >
-      <a-dropdown v-action:edit v-if="selectedRowKeys.length > 0">
+      <a-dropdown v-action:edit :disabled="selectedRowKeys.length === 0">
         <a-menu slot="overlay">
           <a-menu-item key="1"> <a-icon type="delete" />删除 </a-menu-item>
           <!-- lock | unlock -->
@@ -84,6 +81,9 @@
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
+      <a-button type="dashed" @click="tableOption"
+        >{{ (optionAlertShow && '关闭') || '开启' }} alert</a-button
+      >
     </div>
 
     <s-table
