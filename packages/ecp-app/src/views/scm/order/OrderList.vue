@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import scmAPI from '@/api/scm';
 import STable from '@/components/Table';
 import Ellipsis from '@/components/Ellipsis';
 
@@ -307,10 +308,10 @@ export default {
             }
           ]
         });
-        // return getServiceList(Object.assign(parameter, this.queryParam))
-        //   .then(res => {
-        //     return res.result
-        //   })
+        return scmAPI.getOrderList()
+          .then(res => {
+            return res.data;
+          })
       },
       selectedRowKeys: [],
       selectedRows: [],

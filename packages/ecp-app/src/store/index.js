@@ -15,6 +15,7 @@ import {
   DEFAULT_MULTI_TAB
 } from '@/store/mutation-types';
 import getters from './getters';
+import scm from './modules/scm';
 
 Vue.use(Vuex);
 
@@ -38,10 +39,11 @@ Vue.use(Vuex);
 // });
 
 export default new Vuex.Store({
+  modules: { scm },
   state: {
     env: `${process.env.NODE_ENV}`,
     serverUrl: `${process.env.VUE_APP_SERVER_URL}`,
-    restApiRoot: `${process.env.VUE_APP_ROOT_API}`,
+    restApiUrl: `${process.env.VUE_APP_API_URL}`,
     clientUrl: `${process.env.VUE_APP_CLIENT_URL}`,
     device: 'desktop',
     sidebar: true,
@@ -144,6 +146,5 @@ export default new Vuex.Store({
   },
   // plugins: [profileStorage.plugin, deviceStorage.plugin, vuexCache({ timeout: 3000 })],
   plugins: [vuexCache({ timeout: 3000 })],
-  modules: {},
   getters
 });

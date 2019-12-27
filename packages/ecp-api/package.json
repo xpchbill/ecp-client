@@ -1,0 +1,14 @@
+{
+  "name": "ecp-api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "author": "Bill Xiong <xpchbill8@gmail.com>",
+  "private": true,
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "json-server": "^0.15.1"
+  }
+}

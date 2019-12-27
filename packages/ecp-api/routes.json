@@ -1,0 +1,6 @@
+{
+  "/rest/v1/scm/order/list": "/scm_order_list",
+  "/rest/v1/scm/order/list/:id": "/scm_order_list/:id",
+  "/rest/v1/scm/order/list?first_name=:first_name": "/scm_order_list?first_name=:first_name",
+  "/rest/v1/scm/order/list?editable=:editable": "/scm_order_list?editable=:editable"
+}
