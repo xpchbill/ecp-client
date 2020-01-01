@@ -14,8 +14,20 @@ export const routes = [
     children: [scm]
   },
   {
+    path: '/403',
+    component: () => import(/* webpackChunkName: "error" */ '@/views/exception/403')
+  },
+  {
+    path: '/404',
+    component: () => import(/* webpackChunkName: "error" */ '@/views/exception/404')
+  },
+  {
+    path: '/500',
+    component: () => import(/* webpackChunkName: "error" */ '@/views/exception/500')
+  },
+  {
     path: '*',
-    component: () => import(/* webpackChunkName: "notfound" */ '@/views/NotFound.vue')
+    redirect: '/404'
   }
 ];
 

@@ -10,10 +10,17 @@
           </a-col>
           <a-col :md="8" :sm="24">
             <a-form-item label="使用状态">
-              <a-select v-model="queryParam.status" placeholder="请选择" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+              <a-select
+                v-model="queryParam.status"
+                placeholder="请选择"
+                default-value="0"
+                @change="onStatusChange"
+              >
+                <a-select-option value="-1">全部</a-select-option>
+                <a-select-option value="0">关闭</a-select-option>
+                <a-select-option value="1">运行中</a-select-option>
+                <a-select-option value="2">已上线</a-select-option>
+                <a-select-option value="3">异常</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -56,8 +63,8 @@
               class="table-page-search-submitButtons"
               :style="(advanced && { float: 'right', overflow: 'hidden' }) || {}"
             >
-              <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-              <a-button style="margin-left: 8px" @click="() => (queryParam = {})">重置</a-button>
+              <a-button type="primary" @click="onSearch">查询</a-button>
+              <a-button style="margin-left: 8px" @click="onResetFilters">重置</a-button>
               <a @click="toggleAdvanced" style="margin-left: 8px">
                 {{ advanced ? '收起' : '展开' }}
                 <a-icon :type="advanced ? 'up' : 'down'" />
@@ -170,12 +177,11 @@ export default {
         },
         {
           title: '描述',
-          dataIndex: 'description',
-          scopedSlots: { customRender: 'description' }
+          dataIndex: 'description'
         },
         {
           title: '服务调用次数',
-          dataIndex: 'callNo',
+          dataIndex: 'call_no',
           sorter: true,
           needTotal: true,
           customRender: text => text + ' 次'
@@ -183,11 +189,12 @@ export default {
         {
           title: '状态',
           dataIndex: 'status',
-          scopedSlots: { customRender: 'status' }
+          scopedSlots: { customRender: 'status' },
+          sorter: true
         },
         {
           title: '更新时间',
-          dataIndex: 'updatedAt',
+          dataIndex: 'updated_at',
           sorter: true
         },
         {
@@ -197,121 +204,15 @@ export default {
           scopedSlots: { customRender: 'action' }
         }
       ],
-      // 加载数据方法 必须为 Promise 对象
-      loadData: () => {
-        // console.log('loadData.parameter', parameter);
-        return Promise.resolve({
-          pageSize: 10,
-          pageNo: 1,
-          totalCount: 5701,
-          totalPage: 571,
-          data: [
-            {
-              key: 1,
-              id: 1,
-              no: 'No 1',
-              description: '这是一段描述',
-              callNo: 974,
-              status: 2,
-              updatedAt: '1982-09-03 20:29:05',
-              editable: false
-            },
-            {
-              key: 2,
-              id: 2,
-              no: 'No 2',
-              description: '这是一段描述',
-              callNo: 595,
-              status: 2,
-              updatedAt: '1991-06-16 05:24:30',
-              editable: false
-            },
-            {
-              key: 3,
-              id: 3,
-              no: 'No 3',
-              description: '这是一段描述',
-              callNo: 302,
-              status: 2,
-              updatedAt: '1991-01-21 06:32:06',
-              editable: false
-            },
-            {
-              key: 4,
-              id: 4,
-              no: 'No 4',
-              description: '这是一段描述',
-              callNo: 856,
-              status: 2,
-              updatedAt: '1984-06-09 14:16:13',
-              editable: false
-            },
-            {
-              key: 5,
-              id: 5,
-              no: 'No 5',
-              description: '这是一段描述',
-              callNo: 667,
-              status: 0,
-              updatedAt: '1978-10-19 03:39:39',
-              editable: false
-            },
-            {
-              key: 6,
-              id: 6,
-              no: 'No 6',
-              description: '这是一段描述',
-              callNo: 125,
-              status: 0,
-              updatedAt: '2013-05-12 13:33:10',
-              editable: false
-            },
-            {
-              key: 7,
-              id: 7,
-              no: 'No 7',
-              description: '这是一段描述',
-              callNo: 853,
-              status: 1,
-              updatedAt: '1970-11-20 11:30:44',
-              editable: false
-            },
-            {
-              key: 8,
-              id: 8,
-              no: 'No 8',
-              description: '这是一段描述',
-              callNo: 436,
-              status: 3,
-              updatedAt: '1991-01-17 16:37:55',
-              editable: false
-            },
-            {
-              key: 9,
-              id: 9,
-              no: 'No 9',
-              description: '这是一段描述',
-              callNo: 404,
-              status: 2,
-              updatedAt: '2007-07-09 10:07:04',
-              editable: false
-            },
-            {
-              key: 10,
-              id: 10,
-              no: 'No 10',
-              description: '这是一段描述',
-              callNo: 358,
-              status: 3,
-              updatedAt: '1980-05-10 14:23:51',
-              editable: false
-            }
-          ]
-        });
-        return scmAPI.getOrderList()
+      loadData: params => {
+        return scmAPI
+          .getOrderList({
+            ...params,
+            ...this.queryParam
+          })
           .then(res => {
             return res.data;
-          })
+          });
       },
       selectedRowKeys: [],
       selectedRows: [],
@@ -345,6 +246,20 @@ export default {
     // getRoleList({ t: new Date() });
   },
   methods: {
+    onStatusChange(value) {
+      this.queryParam.status = value;
+      if (value === '-1') {
+        delete this.queryParam.status;
+      }
+      this.$refs.table.refresh();
+    },
+    onResetFilters() {
+      this.queryParam = {};
+      this.$refs.table.refresh();
+    },
+    onSearch() {
+      this.$refs.table.refresh();
+    },
     tableOption() {
       if (!this.optionAlertShow) {
         this.options = {
@@ -386,8 +301,14 @@ export default {
         this.$message.error(`${record.no} 订阅失败，规则已关闭`);
       }
     },
-    handleOk() {
-      this.$refs.table.refresh();
+    handleOk(params) {
+      return scmAPI
+        .addOrder(params)
+        .then(() => {
+          this.$refs.modal.currentStep = 0;
+          this.$refs.modal.visible = false;
+          this.$refs.table.refresh();
+        });
     },
     onSelectChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys;

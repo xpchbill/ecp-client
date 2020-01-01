@@ -3,9 +3,12 @@ import axios from 'axios';
 // import { clearDb } from '@/persistence/db_util.js';
 // import store from '@/store/store';
 import router from '@/router';
+import Modal from 'ant-design-vue/es/modal';
 // import Vue from 'vue';
 
-const BASE_URL = process.env.VUE_APP_API_URL || 'http://localhost:3000/rest/v1';
+const BASE_URL = process.env.VUE_APP_API_URL || 'http://localhost:3033/rest/v1';
+
+console.log(BASE_URL); // eslint-disable-line
 
 const axiosApi = axios.create({
   baseURL: BASE_URL,
@@ -72,10 +75,15 @@ axiosApi.interceptors.response.use(
   },
   function(error) {
     let config = error.config;
+
     if (!config || !config.retry) {
+      Modal.error({
+        title: 'Request Failed:',
+        content: error.message,
+        centered: true
+      });
       return Promise.reject(error);
     }
-
     config.__retryCount += 1;
     var backOff = new Promise(resolve => {
       setTimeout(() => {

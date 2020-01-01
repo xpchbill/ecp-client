@@ -29,6 +29,18 @@ module.exports = (req, res, next) => {
   const params = getUrlParams(req.originalUrl);
 
   if (params) {
+    req.query._page = params.pageNo || 1;
+    req.query._limit = params.pageSize || 10;
+    if (params.sortField) {
+      req.query._sort = params.sortField;
+      if (params.sortOrder && params.sortOrder === 'ascend') {
+        req.query._order = 'asc';
+      }
+      if (params.sortOrder && params.sortOrder === 'descend') {
+        req.query._order = 'desc';
+      }
+    }
+
     if (params.componentIds) {
       const group = params.componentIds.split(",")[0];
       const originUrl = req.originalUrl.split("?").shift() + "-group/" + group;
