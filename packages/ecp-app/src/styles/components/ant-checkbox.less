@@ -1,0 +1,20 @@
+@checkbox-prefix-cls: ~'@{ant-prefix}-checkbox';
+@checkbox-inner-prefix-cls: ~'@{checkbox-prefix-cls}-inner';
+
+.@{checkbox-prefix-cls} {
+  &-inner {
+    &::after {
+      top: 45%;
+      left: 15%;
+      width: (@checkbox-size / 22) * 1px;
+      height: (@checkbox-size / 18) * 12px;
+      border: 1px solid @checkbox-check-color;
+      transform: rotate(38deg) scale(1) translate(-50%, -50%);
+    }
+  }
+}
+.@{checkbox-prefix-cls}-checked .@{checkbox-inner-prefix-cls}::after {
+  border: 1px solid @checkbox-check-color;
+  border-top: 0;
+  border-left: 0;
+}

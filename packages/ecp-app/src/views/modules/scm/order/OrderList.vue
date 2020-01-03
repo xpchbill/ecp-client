@@ -302,13 +302,11 @@ export default {
       }
     },
     handleOk(params) {
-      return scmAPI
-        .addOrder(params)
-        .then(() => {
-          this.$refs.modal.currentStep = 0;
-          this.$refs.modal.visible = false;
-          this.$refs.table.refresh();
-        });
+      return scmAPI.addOrder(params).then(() => {
+        this.$refs.modal.currentStep = 0;
+        this.$refs.modal.visible = false;
+        this.$refs.table.refresh();
+      });
     },
     onSelectChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys;

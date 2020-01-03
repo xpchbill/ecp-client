@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "start": "yarn workspace ecp-app start",
-    "start:api": "yarn workspace ecp-api start"
+    "start:api": "yarn workspace ecp-api start",
+    "lint:fix": "yarn workspace ecp-app lint:fix"
   },
   "devDependencies": {
     "lerna": "^3.19.0"
