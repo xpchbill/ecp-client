@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
+    "start": "cp deploy/.env_dev .env && vue-cli-service serve",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix",
-    "start": "cp deploy/.env_dev .env && vue-cli-service serve"
+    "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "ant-design-vue": "^1.4.10",

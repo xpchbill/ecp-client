@@ -9,7 +9,10 @@
   "scripts": {
     "start": "yarn workspace ecp-app start",
     "start:api": "yarn workspace ecp-api start",
-    "lint:fix": "yarn workspace ecp-app lint:fix"
+    "lint:fix": "yarn workspace ecp-app lint:fix",
+    "build:app": "yarn workspace ecp-app build",
+    "build:docker": "cp deploy/.env_dev .env && docker-compose build",
+    "start:docker": "cp deploy/.env_dev .env && docker-compose up"
   },
   "devDependencies": {
     "lerna": "^3.19.0"

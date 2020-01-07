@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  client:
+    env_file: deploy/.env_dev
+    build:
+      context: ./packages/ecp-app
+      dockerfile: Dockerfile
+      args:
+        - VUE_APP_NAME=${VUE_APP_NAME}
+        - VUE_APP_DOMAIN=${VUE_APP_DOMAIN}
+        - VUE_APP_SERVER_URL=${VUE_APP_SERVER_URL}
+        - VUE_APP_BROKER_URL=${VUE_APP_BROKER_URL}
+        - VUE_APP_CLIENT_URL=${VUE_APP_CLIENT_URL}
+        - VUE_APP_API_URL=${VUE_APP_API_URL}
+        - VUE_APP_LOGGER_LEVEL=${VUE_APP_LOGGER_LEVEL}
+    image: billxiong/ecp-app
+    volumes:
+      - ./deploy/.env_dev:/home/node/ecp-app/.env:ro
+
+  client-server:
+    environment:
+      - NGINX_HTTP_SERVER_PORT=${NGINX_HTTP_SERVER_PORT}
+    build:
+      context: ./packages/nginx
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./packages/nginx/nginx-local.template:/etc/nginx/nginx.template
+    depends_on:
+      - client
+    ports:
+      - '${NGINX_HTTP_SERVER_PORT}:${NGINX_HTTP_SERVER_PORT}'
+    expose:
+      - ${NGINX_HTTP_SERVER_PORT}
+    command: /bin/bash -c "envsubst '$${NGINX_HTTP_SERVER_PORT}' < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
