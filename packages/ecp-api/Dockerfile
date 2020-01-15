@@ -1,16 +1,16 @@
 # build stage
 FROM node:lts-alpine as build-stage
 
-RUN mkdir -p /home/node/ecp-app
-WORKDIR /home/node/ecp-app
+RUN mkdir -p /home/node/ecp-api
+WORKDIR /home/node/ecp-api
 
-ENV PATH=/home/node/ecp-app/node_modules/.bin:$PATH
+ENV PATH=/home/node/ecp-api/node_modules/.bin:$PATH
 
-COPY ./package.json /home/node/ecp-app/
-COPY ./babel.config.js /home/node/ecp-app/
-COPY ./vue.config.js /home/node/ecp-app/
-COPY ./src /home/node/ecp-app/src
-#COPY public /home/node/ecp-app/public
+COPY ./package.json /home/node/ecp-api/
+COPY ./routes.json /home/node/ecp-api/
+COPY ./server.js /home/node/ecp-api/
+COPY ./datasets /home/node/ecp-api/datasets
+COPY ./middlewares /home/node/ecp-api/middlewares
 
 ARG VUE_APP_NAME=ECP_APP
 ARG VUE_APP_DOMAIN=localhost
@@ -26,7 +26,4 @@ ENV VUE_APP_BROKER_URL=$VUE_APP_BROKER_URL
 ENV VUE_APP_API_URL=$VUE_APP_API_URL
 ENV VUE_APP_LOGGER_LEVEL=$VUE_APP_LOGGER_LEVEL
 
-RUN npm install -g @vue/cli && yarn install --no-lockfile && yarn build
-
-#RUN yarn install --no-lockfile && yarn build
-#RUN yarn build
+RUN yarn install --no-lockfile

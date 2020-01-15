@@ -18,6 +18,20 @@ services:
     volumes:
       - ./deploy/.env_dev:/home/node/ecp-app/.env:ro
 
+  api:
+    env_file: deploy/.env_dev
+    build:
+      context: ./packages/ecp-api
+      dockerfile: Dockerfile
+      args:
+        - API_SERVER_PORT=${API_SERVER_PORT}
+    ports:
+      - '3033:3033'
+    image: billxiong/ecp-api
+    volumes:
+      - ./deploy/.env_dev:/home/node/ecp-api/.env:ro
+    command: yarn run start
+
   client-server:
     environment:
       - NGINX_HTTP_SERVER_PORT=${NGINX_HTTP_SERVER_PORT}
@@ -29,6 +43,7 @@ services:
       - ./packages/nginx/nginx-local.template:/etc/nginx/nginx.template
     depends_on:
       - client
+      - api
     ports:
       - '${NGINX_HTTP_SERVER_PORT}:${NGINX_HTTP_SERVER_PORT}'
     expose:

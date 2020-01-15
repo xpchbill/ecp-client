@@ -11,7 +11,7 @@ const header = require("./middlewares/header");
 const server = jsonServer.create();
 const jsonDefault = jsonServer.defaults();
 const jsonRouter = jsonServer.router(datasets(), { _isFake: true });
-const port = 3033;
+const port = `${process.env.API_SERVER_PORT}`;
 
 function getUrlParams(url) {
   if (!url || url.length === 0) {

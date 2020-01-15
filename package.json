@@ -12,7 +12,8 @@
     "lint:fix": "yarn workspace ecp-app lint:fix",
     "build:app": "yarn workspace ecp-app build",
     "build:docker": "cp deploy/.env_dev .env && docker-compose build",
-    "start:docker": "cp deploy/.env_dev .env && docker-compose up"
+    "start:docker": "cp deploy/.env_dev .env && docker-compose up -d",
+    "stop:docker": "docker-compose down"
   },
   "devDependencies": {
     "lerna": "^3.19.0"
