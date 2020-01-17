@@ -32,6 +32,7 @@ services:
     container_name: ecp-api
     volumes:
       - ./deploy/.env_dev:/home/node/ecp-api/.env:ro
+    command: yarn run start
 
   client-server:
     env_file: deploy/.env_dev
