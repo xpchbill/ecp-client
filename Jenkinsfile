@@ -12,4 +12,8 @@ node {
   stage('Tests') {
     sh 'docker-compose run -T client yarn test'
   }
+
+  stage('Deploy') {
+    sh 'docker-compose up -d'
+  }
 }
