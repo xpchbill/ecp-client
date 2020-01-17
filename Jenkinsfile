@@ -5,7 +5,7 @@ node {
   }
 
   stage('Build') {
-    sh 'yarn build:docker'
+    sh 'cp deploy/.env_dev .env && docker-compose build'
   }
 
   stage('Tests') {
