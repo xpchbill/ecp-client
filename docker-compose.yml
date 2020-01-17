@@ -15,6 +15,7 @@ services:
         - VUE_APP_API_URL=${VUE_APP_API_URL}
         - VUE_APP_LOGGER_LEVEL=${VUE_APP_LOGGER_LEVEL}
     image: billxiong/ecp-app
+    container_name: ecp-app
     volumes:
       - ./deploy/.env_dev:/home/node/ecp-app/.env:ro
 
@@ -28,6 +29,7 @@ services:
     ports:
       - '3033:3033'
     image: billxiong/ecp-api
+    container_name: ecp-api
     volumes:
       - ./deploy/.env_dev:/home/node/ecp-api/.env:ro
     command: yarn run start
@@ -39,6 +41,7 @@ services:
       context: ./packages/nginx
       dockerfile: Dockerfile
     restart: always
+    container_name: ecp-nginx
     volumes:
       - ./packages/nginx/nginx-local.template:/etc/nginx/nginx.template
     depends_on:
