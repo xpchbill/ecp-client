@@ -14,6 +14,6 @@ node {
   }
 
   stage('Deploy') {
-    sh 'docker-compose up -d'
+    sh 'cp ./deploy/.env_dev .env && docker-compose up -d'
   }
 }
