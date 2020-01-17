@@ -26,4 +26,4 @@ ENV VUE_APP_BROKER_URL=$VUE_APP_BROKER_URL
 ENV VUE_APP_API_URL=$VUE_APP_API_URL
 ENV VUE_APP_LOGGER_LEVEL=$VUE_APP_LOGGER_LEVEL
 
-RUN yarn install --no-lockfile
+RUN yarn install --no-lockfile && yarn start

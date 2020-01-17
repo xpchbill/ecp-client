@@ -32,7 +32,6 @@ services:
     container_name: ecp-api
     volumes:
       - ./deploy/.env_dev:/home/node/ecp-api/.env:ro
-    command: yarn run start
 
   client-server:
     environment:
@@ -46,7 +45,6 @@ services:
       - ./packages/nginx/nginx-local.template:/etc/nginx/nginx.template
     depends_on:
       - client
-      - api
     ports:
       - '${NGINX_HTTP_SERVER_PORT}:${NGINX_HTTP_SERVER_PORT}'
     expose:
