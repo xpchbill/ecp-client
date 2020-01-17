@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cp deploy/.env_dev .env && vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test": "echo \"Everything gonna be okay\"",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix"
   },

@@ -4,7 +4,15 @@ node {
     checkout scm
   }
 
-  stage('Install Package') {
-    sh 'yarn install --no-lockfile'
+  stage('Build') {
+    steps {
+        sh 'yarn build:docker'
+    }
+  }
+
+  stage('Tests') {
+    steps {
+        sh 'docker-compose run -T client yarn test'
+    }
   }
 }
