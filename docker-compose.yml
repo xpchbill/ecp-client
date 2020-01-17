@@ -35,7 +35,6 @@ services:
     command: yarn run start
 
   client-server:
-    env_file: ./deploy/.env_dev
     environment:
       - NGINX_HTTP_SERVER_PORT=7098
     build:
@@ -49,6 +48,4 @@ services:
       - client
     ports:
       - '7098:7098'
-    expose:
-      - 7098
     command: /bin/bash -c "envsubst '$$NGINX_HTTP_SERVER_PORT' < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
