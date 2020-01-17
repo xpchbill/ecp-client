@@ -48,4 +48,4 @@ services:
       - client
     ports:
       - '7098:7098'
-    command: /bin/bash -c "envsubst '$$NGINX_HTTP_SERVER_PORT' < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
+    command: /bin/bash -c "envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
