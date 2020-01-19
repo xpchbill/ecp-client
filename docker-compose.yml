@@ -40,7 +40,7 @@ services:
     build:
       context: ./packages/nginx
       dockerfile: Dockerfile
-    restart: always
+    restart: unless-stopped
     container_name: ecp-nginx
     volumes:
       - ./packages/nginx/nginx-local.template:/etc/nginx/nginx.template
