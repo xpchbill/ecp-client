@@ -1,4 +1,4 @@
-# Copyright 2019 Edouard Maleix, read LICENSE
+# Copyright 2019 Bill, read LICENSE
 
 worker_processes 8;
 
@@ -55,9 +55,10 @@ http {
     # gzip_proxied expired no-cache no-store private auth;
     gzip_disable msie6;
 
+    root /etc/nginx/html;
+
     location / {
       expires $expires;
-      root   /etc/nginx/html;
       index  index.html index.htm;
       try_files $uri $uri/ /index.html;
       gzip_static on;
