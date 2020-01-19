@@ -50,4 +50,4 @@ services:
       - '${NGINX_HTTP_SERVER_PORT}:${NGINX_HTTP_SERVER_PORT}'
     expose:
       - ${NGINX_HTTP_SERVER_PORT}
-    command: /bin/bash -c "envsubst '$${NGINX_HTTP_SERVER_PORT}' < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
+    command: sh -c "envsubst '$${NGINX_HTTP_SERVER_PORT}' < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
