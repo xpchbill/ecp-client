@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+// const CompressionPlugin = require('compression-webpack-plugin');
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
 const generate = require('@ant-design/colors/lib/generate').default;
 
@@ -57,23 +57,23 @@ module.exports = {
     }
   },
 
-  configureWebpack: {
-    plugins: [new ThemeColorReplacer(themePluginOption)]
-    // optimization: {
-    //   // runtimeChunk: 'single',
-    //   splitChunks: {
-    //     minSize: 10000,
-    //     maxSize: 250000,
-    //     cacheGroups: {
-    //       node_vendors: {
-    //         test: /[\\/]node_modules[\\/]/,
-    //         // chunks: "async",
-    //         priority: 1
-    //       }
-    //     }
-    //   }
-    // }
-  },
+  // configureWebpack: {
+  //   plugins: [new ThemeColorReplacer(themePluginOption)]
+  //   optimization: {
+  //     // runtimeChunk: 'single',
+  //     splitChunks: {
+  //       minSize: 10000,
+  //       maxSize: 250000,
+  //       cacheGroups: {
+  //         node_vendors: {
+  //           test: /[\\/]node_modules[\\/]/,
+  //           // chunks: "async",
+  //           priority: 1
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
 
   chainWebpack: config => {
     config.resolve.alias.set('@$', path.join(__dirname, 'src'));
@@ -86,19 +86,21 @@ module.exports = {
       })
     );
 
-    if (process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
-      config.plugin('CompressionPlugin').use(
-        new CompressionPlugin({
-          filename: '[path].gz[query]',
-          cache: true,
-          algorithm: 'gzip',
-          test: new RegExp('\\.(js|css)$'),
-          threshold: 1024,
-          minRatio: 0.8,
-          compressionOptions: { level: 6 }
-        })
-      );
-    }
+    // if (process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
+    //   config.plugin('CompressionPlugin').use(
+    //     new CompressionPlugin({
+    //       filename: '[path].gz[query]',
+    //       cache: true,
+    //       algorithm: 'gzip',
+    //       test: new RegExp('\\.(js|css)$'),
+    //       threshold: 1024,
+    //       minRatio: 0.8,
+    //       compressionOptions: { level: 6 }
+    //     })
+    //   );
+    // }
+
+    config.plugin('ThemeColorReplacer').use(new ThemeColorReplacer(themePluginOption));
 
     // config.module
     //   .rule('css')
