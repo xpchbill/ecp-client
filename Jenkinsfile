@@ -6,7 +6,7 @@ node {
 
   stage('Build') {
     sh 'docker -v'
-    sh 'cp ./deploy/.env_dev .env && docker-compose build'
+    sh 'cp ./deploy/.env_prod .env && docker-compose build'
   }
 
   stage('Tests') {

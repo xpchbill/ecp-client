@@ -7,12 +7,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "yarn workspace ecp-app start",
-    "start:api": "yarn workspace ecp-api start",
+    "start": "cp deploy/.env_dev .env && yarn workspace ecp-app start",
+    "start:api": "cp deploy/.env_dev .env && yarn workspace ecp-api start:dev",
     "lint:fix": "yarn workspace ecp-app lint:fix",
     "build:app": "yarn workspace ecp-app build",
-    "build:docker": "cp deploy/.env_dev .env && docker-compose build",
-    "start:docker": "cp deploy/.env_dev .env && docker-compose up -d",
+    "build:docker": "cp deploy/.env_prod .env && docker-compose build",
+    "start:docker": "cp deploy/.env_prod .env && docker-compose up -d",
     "stop:docker": "docker-compose down"
   },
   "devDependencies": {

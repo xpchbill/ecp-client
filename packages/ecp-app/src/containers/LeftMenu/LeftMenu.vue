@@ -72,7 +72,7 @@ export default {
 
 <style lang="less" scoped>
 .ecp-layout__main-menu {
-  z-index: 10;
+  z-index: 1031;
   box-shadow: 4px 0 4px 0 rgba(217, 217, 217, 0.5);
 }
 </style>

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const isArray = require("lodash/isArray");
 const floor = require("lodash/floor");
 const jsonServer = require("json-server");

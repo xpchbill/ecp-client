@@ -1,12 +1,9 @@
-import Menu from 'ant-design-vue/es/menu';
 import Icon from 'ant-design-vue/es/icon';
-
-import DrawerMenu from './DrawerMenu';
-
-const { Item, SubMenu } = Menu;
+import DrawerMenuItem from './DrawerMenuItem';
+import './index.less';
 
 export default {
-  name: 'SMenu',
+  name: 'DrawerMenu',
   props: {
     menu: {
       type: Array,
@@ -152,33 +149,43 @@ export default {
   },
 
   render() {
-    const { mode, theme, menu, collapsed } = this;
-    const props = {
-      mode: mode,
-      theme: theme,
-      openKeys: this.openKeys
-    };
-    const on = {
-      select: obj => {
-        this.selectedKeys = obj.selectedKeys;
-        this.$emit('select', obj);
-      },
-      openChange: this.onOpenChange
-    };
+    const { menu } = this.$props;
+    // const { mode, theme, menu, collapsed } = this;
+    // const props = {
+    //   mode: mode,
+    //   theme: theme,
+    //   openKeys: this.openKeys
+    // };
+    // const on = {
+    //   select: obj => {
+    //     this.selectedKeys = obj.selectedKeys;
+    //     this.$emit('select', obj);
+    //   },
+    //   openChange: this.onOpenChange
+    // };
 
-    const menuTree = menu.map(item => {
-      if (item.hidden) {
-        return null;
-      }
-      return this.renderItem(item);
-    });
+    // const menuTree = menu.map(item => {
+    //   if (item.hidden) {
+    //     return null;
+    //   }
+    //   return this.renderItem(item);
+    // });
     // {...{ props, on: on }}
-    return !collapsed ? (
-      <Menu vModel={this.selectedKeys} {...{ props, on: on }}>
-        {menuTree}
-      </Menu>
-    ) : (
-      <DrawerMenu menu={menu} />
+    // const menuItems = menu.map(item => {
+    //   if (item.hidden) {
+    //     return null;
+    //   }
+    //   return <DrawerMenuItem itemData={item} />;
+    // });
+    return (
+      <div class="ecp-drawer-menu">
+        {menu.map(item => {
+          if (item.hidden) {
+            return null;
+          }
+          return <DrawerMenuItem itemData={item} />;
+        })}
+      </div>
     );
   }
 };
