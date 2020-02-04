@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import Icon from 'ant-design-vue/es/icon';
 import Popover from 'ant-design-vue/es/popover';
 
@@ -15,11 +16,11 @@ export default {
     };
   },
   mounted() {
-    // this.updateMenu();
+    this.updateMenu();
   },
   watch: {
     $route: function() {
-      // this.updateMenu();
+      this.updateMenu();
       this.hide();
     }
   },
@@ -30,13 +31,29 @@ export default {
     handleVisibleChange(visible) {
       this.visible = visible;
     },
+    updateMenu() {
+      const routes = this.$route.matched.concat();
+      const { hidden } = this.$route.meta;
+      if (routes.length >= 3 && hidden) {
+        routes.pop();
+        this.selectedKeys = [routes[routes.length - 1].path];
+      } else {
+        this.selectedKeys = [routes.pop().path];
+      }
+    },
     renderChildren(children) {
       if (children) {
+        const { path } = this.$route;
+
         return (
           <ul class="ecp-left-popover-list__content">
             {children.map(child => (
               <li>
-                <router-link to={child.path}>{child.meta.title}</router-link>
+                {path !== child.path ? (
+                  <router-link to={child.path}>{child.meta.title}</router-link>
+                ) : (
+                  child.meta.title
+                )}
               </li>
             ))}
           </ul>
@@ -71,17 +88,23 @@ export default {
     const { visible } = this;
     const { itemData } = this.$props;
     const childItems = itemData.children.map(child => this.renderItem(child));
+    const routes = this.$route.matched.concat();
+    const isActiveItem = routes.some(route => route.path && route.path === itemData.path);
+    const classes = classnames('ecp-drawer-menu-item', {
+      'is-active': isActiveItem
+    });
 
     return (
       <Popover
         overlayClassName="ecp-drawer-menu-popover"
         placement="rightTop"
         visible={visible}
+        // trigger="click"
         on-visibleChange={this.handleVisibleChange}>
         <template slot="content">{childItems}</template>
-        <div class="ecp-drawer-menu-item">
-          {itemData.meta.title}
+        <div class={classes}>
           <Icon type={itemData.meta.icon} />
+          {itemData.meta.title}
         </div>
       </Popover>
     );

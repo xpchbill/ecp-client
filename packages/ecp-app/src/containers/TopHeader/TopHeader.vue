@@ -1,6 +1,11 @@
 <template lang="html">
   <div :class="['ecp-top-header', device]">
-    <div class="ecp-top-header__title">System Name</div>
+    <div class="banner-effect">
+      <div class="banner-effect-stars1"></div>
+      <div class="banner-effect-stars2"></div>
+      <div class="banner-effect-stars3"></div>
+    </div>
+    <div class="ecp-top-header__title">System Logo</div>
     <user-menu></user-menu>
   </div>
 </template>

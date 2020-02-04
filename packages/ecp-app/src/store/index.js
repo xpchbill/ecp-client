@@ -46,7 +46,7 @@ export default new Vuex.Store({
     restApiUrl: `${process.env.VUE_APP_API_URL}`,
     clientUrl: `${process.env.VUE_APP_CLIENT_URL}`,
     device: 'desktop',
-    sidebar: true,
+    sidebar: false,
     theme: 'light',
     multiTab: true,
     layout: 'sidemenu',

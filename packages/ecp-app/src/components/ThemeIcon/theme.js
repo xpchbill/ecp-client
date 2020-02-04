@@ -36,32 +36,32 @@ const colorList = [
     color: '#2D4F97'
   },
   {
-    key: '明青',
-    color: '#21a0a0'
-  },
-  {
-    key: '薄暮',
-    color: '#c92828'
-  },
-  {
-    key: '火山',
-    color: '#d14719'
-  },
-  {
-    key: '极光绿',
-    color: '#589433'
+    key: '暗黑',
+    color: '#27343A'
   },
   {
     key: '拂晓蓝',
-    color: '#2787db'
+    color: '#00809d'
   },
   {
-    key: '极客蓝',
-    color: '#1136c6'
+    key: '薄暮',
+    color: '#C43E1B'
+  },
+  {
+    key: '火山',
+    color: '#ED6C46'
+  },
+  {
+    key: '极光绿',
+    color: '#22A366'
+  },
+  {
+    key: '明青',
+    color: '#006C70'
   },
   {
     key: '酱紫',
-    color: '#6837ad'
+    color: '#9331BF'
   }
 ];
 

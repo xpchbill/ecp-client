@@ -2,6 +2,7 @@
   <a-layout-sider
     collapsible
     class="ecp-layout__main-menu"
+    :collapsed="collapsed"
     :theme="navTheme"
     :collapsedWidth="collapsedWidth"
     @collapse="toggle"
@@ -72,7 +73,7 @@ export default {
 
 <style lang="less" scoped>
 .ecp-layout__main-menu {
-  z-index: 1031;
+  z-index: 10;
   box-shadow: 4px 0 4px 0 rgba(217, 217, 217, 0.5);
 }
 </style>

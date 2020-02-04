@@ -100,6 +100,7 @@
       :columns="columns"
       :data="loadData"
       :alert="options.alert"
+      :scroll="{ x: 2650 }"
       :rowSelection="options.rowSelection"
       showPagination="auto"
     >
@@ -169,14 +170,19 @@ export default {
       columns: [
         {
           title: '#',
+          fixed: 'left',
+          width: 100,
           scopedSlots: { customRender: 'serial' }
         },
         {
           title: '规则编号',
+          fixed: 'left',
+          width: 100,
           dataIndex: 'no'
         },
         {
           title: '描述',
+          width: 200,
           dataIndex: 'description'
         },
         {
@@ -184,23 +190,83 @@ export default {
           dataIndex: 'call_no',
           sorter: true,
           needTotal: true,
+          width: 200,
           customRender: text => text + ' 次'
         },
         {
           title: '状态',
           dataIndex: 'status',
+          width: 200,
           scopedSlots: { customRender: 'status' },
           sorter: true
         },
         {
           title: '更新时间',
           dataIndex: 'updated_at',
+          width: 200,
           sorter: true
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
+        },
+        {
+          title: '服务调用次数',
+          dataIndex: 'call_no',
+          sorter: true,
+          needTotal: true,
+          width: 200,
+          customRender: text => text + ' 次'
         },
         {
           title: '操作',
           dataIndex: 'action',
-          width: '150px',
+          fixed: 'right',
+          width: 200,
           scopedSlots: { customRender: 'action' }
         }
       ],

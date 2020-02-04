@@ -1,21 +1,56 @@
 @import '../../styles/all-vars.less';
 
+.ecp-drawer-menu {
+  padding-top: 8px;
+}
+
+.ant-menu-submenu > .ant-menu {
+  background: #f3f3f3;
+}
+
+.ant-menu-sub .ant-menu-sub {
+  background: #f3f3f3;
+}
+
 .ecp-drawer-menu-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 0;
-}
+  padding: 14px 0;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 
-.ecp-drawer-menu-item i {
-  margin-top: 4px;
+  .anticon {
+    font-size: 14px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover,
+  &.ant-popover-open {
+    background-color: rgba(@primary-color, 0.1);
+
+    .anticon {
+      transform: scale(1.2);
+    }
+  }
+
+  &.is-active {
+    color: #fff;
+    background-color: @primary-color;
+  }
+
+  i {
+    margin-bottom: 6px;
+  }
 }
 
 .ecp-drawer-menu-popover {
   position: fixed;
+  top: 54px!important;
   height: calc(100% - 54px);
   min-width: 300px;
   padding-left: 0;
+  z-index: 21;
   box-shadow: 4px 0 4px 0 rgba(126,126,126,0.17);
 }
 
@@ -39,13 +74,18 @@
 .ecp-left-popover-list {
   display: flex;
   flex-direction: column;
+  margin: 6px 0 20px;
+
+  a:hover {
+    text-decoration: underline;
+  }
 
   &__title {
     position: relative;
     font-size: 18px;
     font-weight: 300;
     margin-bottom: 8px;
-    padding-left: 6px;
+    padding-left: 8px;
 
     &::before {
       position: absolute;
@@ -53,7 +93,7 @@
       top: 5px;
       content: " ";
       height: 16px;
-      border-left: 2px solid #3e64b6;
+      border-left: 2px solid @primary-color;
     }
   }
 
@@ -66,5 +106,24 @@
     li {
       margin-right: 16px;
     }
+  }
+}
+
+// ecp-layout__main-menu
+.ecp-layout__main-menu {
+  .ant-menu-root {
+    padding: 10px 0;
+  }
+
+  .ant-menu-inline .ant-menu-submenu-title,
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+  .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+    margin: 0;
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .ant-menu-submenu-title .anticon {
+    font-size: 14px;
   }
 }
