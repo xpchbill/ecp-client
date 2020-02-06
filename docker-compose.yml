@@ -16,8 +16,6 @@ services:
         - VUE_APP_LOGGER_LEVEL=${VUE_APP_LOGGER_LEVEL}
     image: billxiong/ecp-app
     container_name: ecp-app
-    volumes:
-      - ./deploy/.env_prod:/home/node/ecp-app/.env:ro
 
   api:
     env_file: ./deploy/.env_prod
