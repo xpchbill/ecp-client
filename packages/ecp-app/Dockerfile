@@ -12,7 +12,7 @@ COPY ./vue.config.js /home/node/ecp-app/
 COPY ./src /home/node/ecp-app/src
 #COPY public /home/node/ecp-app/public
 
-RUN npm install -g @vue/cli --registry=https://registry.npm.taobao.org && yarn install --no-lockfile && yarn build
+RUN npm install -g @vue/cli --registry=https://registry.npm.taobao.org && yarn install --no-lockfile --registry https://registry.npm.taobao.org && yarn build
 
 #RUN yarn install --no-lockfile && yarn build
 #RUN yarn build

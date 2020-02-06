@@ -12,4 +12,4 @@ COPY ./server.js /home/node/ecp-api/
 COPY ./datasets /home/node/ecp-api/datasets
 COPY ./middlewares /home/node/ecp-api/middlewares
 
-RUN yarn install --no-lockfile
+RUN yarn install --no-lockfile --registry https://registry.npm.taobao.org

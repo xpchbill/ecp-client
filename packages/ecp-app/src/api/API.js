@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import axios from 'axios';
 // import Url from 'url-parse';
 // import { clearDb } from '@/persistence/db_util.js';
