@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "cp ../../deploy/.env_dev .env && vue-cli-service serve",
-    "build": "cp ../../deploy/.env_prod .env && vue-cli-service build",
+    "build": "vue-cli-service build",
     "test": "echo \"Everything gonna be okay\"",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix"
