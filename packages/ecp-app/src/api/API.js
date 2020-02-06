@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import axios from 'axios';
 // import Url from 'url-parse';
 // import { clearDb } from '@/persistence/db_util.js';
@@ -8,7 +6,7 @@ import router from '@/router';
 import Modal from 'ant-design-vue/es/modal';
 // import Vue from 'vue';
 
-const BASE_URL = process.env.VUE_APP_API_URL || 'http://localhost:3033/rest/v1';
+const BASE_URL = `${process.env.VUE_APP_API_URL}` || 'http://localhost:3033/rest/v1';
 
 console.log(BASE_URL); // eslint-disable-line
 
