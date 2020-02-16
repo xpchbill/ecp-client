@@ -17,21 +17,6 @@ services:
     image: billxiong/ecp-app
     container_name: ecp-app
 
-  api:
-    env_file: ./deploy/.env_prod
-    build:
-      context: ./packages/ecp-api
-      dockerfile: Dockerfile
-      args:
-        - API_SERVER_PORT=${API_SERVER_PORT}
-    ports:
-      - '${API_SERVER_PORT}:${API_SERVER_PORT}'
-    image: billxiong/ecp-api
-    container_name: ecp-api
-    volumes:
-      - ./deploy/.env_prod:/home/node/ecp-api/.env:ro
-    command: yarn run start
-
   client-server:
     env_file: ./deploy/.env_prod
     environment:

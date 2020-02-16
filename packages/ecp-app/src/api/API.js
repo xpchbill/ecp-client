@@ -6,22 +6,69 @@ import router from '@/router';
 import Modal from 'ant-design-vue/es/modal';
 // import Vue from 'vue';
 
+axios.defaults.transformRequest = [
+  function(data) {
+    let ret = '';
+    for (let it in data) {
+      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
+    }
+    return ret;
+  }
+];
+
 const BASE_URL = `${process.env.VUE_APP_API_URL}` || 'http://localhost:3033/rest/v1';
 
 console.log(BASE_URL); // eslint-disable-line
 
+const getUrlVars = () => {
+  const vars = {};
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+    vars[key] = value;
+  });
+  return vars;
+};
+
+const getUrlParam = (parameter, defaultvalue) => {
+  var urlparameter = defaultvalue;
+  if (window.location.href.indexOf(parameter) > -1) {
+    urlparameter = getUrlVars()[parameter];
+  }
+  return urlparameter;
+};
+
+// const setCookie = (name, value, hour) => {
+//   var exp = new Date();
+//   exp.setTime(exp.getTime() + hour * 60 * 60 * 1000);
+//   document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+// };
+
+const token = getUrlParam('ecp_cookie');
+// setCookie('ecp_cookie', token);
+
+// const getCookie = name => {
+//   var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'));
+//   if (arr != null) {
+//     return unescape(arr[2]);
+//   }
+//   return '';
+// };
+
 const axiosApi = axios.create({
   baseURL: BASE_URL,
-  timeout: 8000,
-  retry: 2 ** 31
+  timeout: 30000,
+  retry: 2 ** 31,
+  withCredentials: true,
+  headers: {
+    ecp_cookie: token,
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+  }
 });
 
 // axiosApi.interceptors.request.use(
 //   config => {
-//     const url = new Url(config.url);
-//     const token = getToken(config.method.toUpperCase(), url.pathname, config.data);
-//     config.headers.common['Authorization'] = 'Bearer ' + token;
-//     config.headers.common['Accept-Language'] = navigator.language || navigator.userLanguage;
+//     if (config.method === 'post') {
+//       config.data = JSON.stringify(config.data);
+//     }
 //     return config;
 //   },
 //   error => {

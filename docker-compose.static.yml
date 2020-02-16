@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   client:
-    env_file: ./deploy/.env_dev
+    env_file: ./deploy/.env_static
     build:
       context: ./packages/ecp-app
       dockerfile: Dockerfile
@@ -17,10 +17,25 @@ services:
     image: billxiong/ecp-app
     container_name: ecp-app
     volumes:
-      - ./deploy/.env_dev:/home/node/ecp-app/.env:ro
+      - ./deploy/.env_static:/home/node/ecp-app/.env:ro
+
+  api:
+    env_file: ./deploy/.env_static
+    build:
+      context: ./packages/ecp-api
+      dockerfile: Dockerfile
+      args:
+        - API_SERVER_PORT=${API_SERVER_PORT}
+    ports:
+      - '${API_SERVER_PORT}:${API_SERVER_PORT}'
+    image: billxiong/ecp-api
+    container_name: ecp-api
+    volumes:
+      - ./deploy/.env_static:/home/node/ecp-api/.env:ro
+    command: yarn run start
 
   client-server:
-    env_file: ./deploy/.env_dev
+    env_file: ./deploy/.env_static
     environment:
       - NGINX_HTTP_SERVER_PORT=${NGINX_HTTP_SERVER_PORT}
     build:

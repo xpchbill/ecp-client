@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   client:
-    env_file: ./deploy/.env_dev
+    env_file: ./deploy/.env_int
     build:
       context: ./packages/ecp-app
       dockerfile: Dockerfile
@@ -16,11 +16,9 @@ services:
         - VUE_APP_LOGGER_LEVEL=${VUE_APP_LOGGER_LEVEL}
     image: billxiong/ecp-app
     container_name: ecp-app
-    volumes:
-      - ./deploy/.env_dev:/home/node/ecp-app/.env:ro
 
   client-server:
-    env_file: ./deploy/.env_dev
+    env_file: ./deploy/.env_int
     environment:
       - NGINX_HTTP_SERVER_PORT=${NGINX_HTTP_SERVER_PORT}
     build:

@@ -1,13 +1,16 @@
 <template>
   <a-layout :class="['ecp-layout', device]">
-    <a-layout-header class="ecp-layout__header">
+    <a-layout-header v-if="showGlobalUI" class="ecp-layout__header">
       <top-header />
     </a-layout-header>
     <a-layout class="ecp-layout__main">
-      <left-menu />
-      <a-layout-content class="ecp-layout__main-body">
+      <left-menu v-if="showGlobalUI" />
+      <a-layout-content
+        class="ecp-layout__main-body"
+        v-bind:style="{ 'padding-top': showGlobalUI ? '40px' : '15px' }"
+      >
         <multi-tab
-          v-if="multiTab"
+          v-if="multiTab && showGlobalUI"
           class="ecp-multi-tabs"
           :style="{ width: multiTabWidth }"
         ></multi-tab>
@@ -35,7 +38,9 @@ export default {
     'left-menu': LeftMenu
   },
   data() {
-    return {};
+    return {
+      showGlobalUI: `${process.env.VUE_APP_SHOW_GLOBAL_UI}` === 'true'
+    };
   },
   computed: {
     multiTabWidth() {
@@ -61,6 +66,10 @@ export default {
 
   &__main-body {
     padding: 40px 0 0;
+  }
+
+  .ecp-multi-tabs {
+    z-index: 3;
   }
 }
 </style>

@@ -37,29 +37,29 @@ const scm = {
       ]
     },
     {
-      path: `${modulePath}/order`,
-      name: `${modulePath}/order`,
+      path: `${modulePath}/diyorder`,
+      name: `${modulePath}/diyorder`,
       meta: { title: '生产销售' },
       component: FragmentView,
-      redirect: `${modulePath}/order/list`,
+      redirect: `${modulePath}/diyorder/list`,
       children: [
         {
-          path: `${modulePath}/order/new`,
-          name: `${modulePath}/order/new`,
+          path: `${modulePath}/diyorder/new`,
+          name: `${modulePath}/diyorder/new`,
           meta: { title: '生产订单录入' },
-          component: () => import('@/views/modules/scm/order/NewOrder.vue')
+          component: () => import('@/views/modules/scm/diyorder/NewOrder.vue')
         },
         {
-          path: `${modulePath}/order/list`,
-          name: `${modulePath}/order/list`,
+          path: `${modulePath}/diyorder/list`,
+          name: `${modulePath}/diyorder/list`,
           meta: { title: '生产订单管理' },
-          component: () => import('@/views/modules/scm/order/OrderList.vue')
+          component: () => import('@/views/modules/scm/diyorder/OrderList.vue')
         },
         {
-          path: `${modulePath}/order/setting`,
-          name: `${modulePath}/order/setting`,
+          path: `${modulePath}/diyorder/setting`,
+          name: `${modulePath}/diyorder/setting`,
           meta: { title: '订单设置' },
-          component: () => import('@/views/modules/scm/order/OrderList.vue')
+          component: () => import('@/views/modules/scm/diyorder/OrderList.vue')
         }
       ]
     }

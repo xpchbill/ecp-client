@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "cp ../../deploy/.env_dev .env && vue-cli-service serve",
+    "start:dev": "cp ../../deploy/.env_dev .env && vue-cli-service serve",
+    "start:static": "cp ../../deploy/.env_static .env && vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "echo \"Everything gonna be okay\"",
     "lint": "vue-cli-service lint",

@@ -29,7 +29,7 @@ export default {
     },
     pageSize: {
       type: Number,
-      default: 10
+      default: 20
     },
     showSizeChanger: {
       type: Boolean,
@@ -83,7 +83,7 @@ export default {
           ...this.$route,
           name: this.$route.name,
           params: Object.assign({}, this.$route.params, {
-            pageNo: val
+            pageNumber: val
           })
         });
     },
@@ -104,8 +104,8 @@ export default {
     }
   },
   created() {
-    const { pageNo } = this.$route.params;
-    const localPageNum = (this.pageURI && pageNo && parseInt(pageNo)) || this.pageNum;
+    const { pageNumber } = this.$route.params;
+    const localPageNum = (this.pageURI && pageNumber && parseInt(pageNumber)) || this.pageNum;
     this.localPagination =
       (['auto', true].includes(this.showPagination) &&
         Object.assign({}, this.localPagination, {
@@ -145,23 +145,23 @@ export default {
       this.localLoading = true;
       const parameter = Object.assign(
         {
-          pageNo:
+          page:
             (pagination && pagination.current) ||
             (this.showPagination && this.localPagination.current) ||
             this.pageNum,
-          pageSize:
+          rows:
             (pagination && pagination.pageSize) ||
             (this.showPagination && this.localPagination.pageSize) ||
             this.pageSize
         },
         (sorter &&
           sorter.field && {
-            sortField: sorter.field
+            sidx: sorter.field
           }) ||
           {},
         (sorter &&
           sorter.order && {
-            sortOrder: sorter.order
+            sort: sorter.order
           }) ||
           {},
         {
@@ -170,33 +170,39 @@ export default {
       );
       console.log('parameter', parameter); // eslint-disable-line
       const result = this.data(parameter);
-      // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
+      // 对接自己的通用数据接口需要修改下方代码中的 data.pageNumber, data.totalRow
       // eslint-disable-next-line
       if ((typeof result === 'object' || typeof result === 'function') && typeof result.then === 'function') {
         result
           .then(r => {
+            const data = r.data;
             this.localPagination =
               (this.showPagination &&
                 Object.assign({}, this.localPagination, {
-                  current: r.pageNo, // 返回结果中的当前分页数
-                  total: r.totalCount, // 返回结果中的总记录数
+                  current: data.pageNumber, // 返回结果中的当前分页数
+                  total: data.totalRow, // 返回结果中的总记录数
                   showSizeChanger: this.showSizeChanger,
                   pageSize: (pagination && pagination.pageSize) || this.localPagination.pageSize
                 })) ||
               false;
             // 为防止删除数据后导致页面当前页面数据长度为 0 ,自动翻页到上一页
-            if (r.data.length === 0 && this.showPagination && this.localPagination.current > 1) {
+            if (
+              data.list &&
+              data.list.length === 0 &&
+              this.showPagination &&
+              this.localPagination.current > 1
+            ) {
               this.localPagination.current--;
               this.loadData();
               return;
             }
 
-            // 这里用于判断接口是否有返回 r.totalCount 且 this.showPagination = true 且 pageNo 和 pageSize 存在 且 totalCount 小于等于 pageNo * pageSize 的大小
+            // 这里用于判断接口是否有返回 data.totalRow 且 this.showPagination = true 且 pageNumber 和 pageSize 存在 且 totalRow 小于等于 pageNumber * pageSize 的大小
             // 当情况满足时，表示数据不满足分页大小，关闭 table 分页功能
             try {
               if (
                 ['auto', true].includes(this.showPagination) &&
-                r.totalCount <= r.pageNo * this.localPagination.pageSize
+                data.totalRow <= data.pageNumber * this.localPagination.pageSize
               ) {
                 this.localPagination.hideOnSinglePage = true;
               }
@@ -204,7 +210,7 @@ export default {
               this.localPagination = false;
             }
             console.log('loadData -> this.localPagination', this.localPagination); // eslint-disable-line
-            this.localDataSource = r.data; // 返回结果中的数组数据
+            this.localDataSource = data.list; // 返回结果中的数组数据
             this.localLoading = false;
           })
           .catch(() => {

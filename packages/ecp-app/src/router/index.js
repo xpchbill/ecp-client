@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import cloud from './cloud';
+import crm from './crm';
 import scm from './scm';
 
 Vue.use(Router);
@@ -10,9 +11,9 @@ export const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: { name: '/scm/order/list' },
+    redirect: { name: '/scm/diyorder/list' },
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-    children: [cloud, scm]
+    children: [cloud, crm, scm]
   },
   {
     path: '/403',
